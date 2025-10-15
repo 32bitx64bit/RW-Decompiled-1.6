@@ -1,0 +1,38 @@
+using UnityEngine;
+using Verse;
+
+namespace RimWorld;
+
+public class CompRitualEffect_Drum : CompRitualEffect_IntervalSpawn
+{
+	protected new CompProperties_RitualEffectDrum Props => (CompProperties_RitualEffectDrum)props;
+
+	protected override Vector3 SpawnPos(LordJob_Ritual ritual)
+	{
+		//IL_0000: Unknown result type (might be due to invalid IL or missing references)
+		return Vector3.zero;
+	}
+
+	public override void SpawnFleck(LordJob_Ritual ritual, Vector3? forcedPos = null, float? exactRotation = null)
+	{
+		//IL_00cf: Unknown result type (might be due to invalid IL or missing references)
+		//IL_00d4: Unknown result type (might be due to invalid IL or missing references)
+		//IL_00d6: Unknown result type (might be due to invalid IL or missing references)
+		Vector3 val = default(Vector3);
+		foreach (Thing item in ritual.Map.listerBuldingOfDefInProximity.GetForCell(ritual.selectedTarget.Cell, Props.maxDistance, ThingDefOf.Drum))
+		{
+			if (item is Building_MusicalInstrument building_MusicalInstrument && item.GetRoom() == ritual.selectedTarget.Cell.GetRoom(ritual.Map) && building_MusicalInstrument.IsBeingPlayed)
+			{
+				for (int i = 0; i < Props.spawnCount; i++)
+				{
+					float num = Rand.Sign;
+					float num2 = Rand.Sign;
+					((Vector3)(ref val))._002Ector(num * Rand.Value * Props.maxOffset, 0f, num2 * Rand.Value * Props.maxOffset);
+					base.SpawnFleck(ritual, item.Position.ToVector3Shifted() + val);
+				}
+			}
+		}
+		burstsDone++;
+		lastSpawnTick = GenTicks.TicksGame;
+	}
+}

@@ -1,0 +1,55 @@
+using UnityEngine;
+using Verse;
+
+namespace RimWorld;
+
+public class Skyfaller_FlyingPawn : Skyfaller
+{
+	public Pawn Pawn => (Pawn)innerContainer[0];
+
+	public override void SpawnSetup(Map map, bool respawningAfterLoad)
+	{
+		base.SpawnSetup(map, respawningAfterLoad);
+		AnimationDef bestFlyAnimation = Pawn_FlightTracker.GetBestFlyAnimation(Pawn, Rot4.FromAngleFlat(angle));
+		if (bestFlyAnimation != null)
+		{
+			Pawn.Drawer.renderer.SetAnimation(bestFlyAnimation);
+		}
+	}
+
+	protected override void DrawAt(Vector3 drawLoc, bool flip = false)
+	{
+		//IL_0016: Unknown result type (might be due to invalid IL or missing references)
+		GetDrawPositionAndRotation(ref drawLoc, out var _);
+		Pawn?.DrawNowAt(drawLoc, flip);
+		DrawDropSpotShadow();
+	}
+
+	protected override void SpawnThings()
+	{
+		Pawn pawn = Pawn;
+		if (pawn != null)
+		{
+			GenSpawn.Spawn(pawn, base.Position, base.Map);
+			pawn.Rotation = Rot4.East;
+			pawn.Drawer.renderer.SetAnimation(null);
+		}
+	}
+
+	protected override void DrawDropSpotShadow()
+	{
+		//IL_0011: Unknown result type (might be due to invalid IL or missing references)
+		//IL_0016: Unknown result type (might be due to invalid IL or missing references)
+		//IL_0030: Unknown result type (might be due to invalid IL or missing references)
+		//IL_003f: Unknown result type (might be due to invalid IL or missing references)
+		//IL_0052: Unknown result type (might be due to invalid IL or missing references)
+		Material shadowMaterial = base.ShadowMaterial;
+		if ((Object)(object)shadowMaterial != (Object)null)
+		{
+			Vector3 drawPos = DrawPos;
+			drawPos.y = AltitudeLayer.Shadows.AltitudeFor();
+			drawPos.z = base.Position.ToVector3Shifted().z;
+			Skyfaller.DrawDropSpotShadow(drawPos, base.Rotation, shadowMaterial, def.skyfaller.shadowSize, ticksToImpact);
+		}
+	}
+}

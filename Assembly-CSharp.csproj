@@ -1,0 +1,44 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <AssemblyName>Assembly-CSharp</AssemblyName>
+    <GenerateAssemblyInfo>False</GenerateAssemblyInfo>
+    <TargetFramework>net40</TargetFramework>
+  </PropertyGroup>
+  <PropertyGroup>
+    <LangVersion>11.0</LangVersion>
+    <AllowUnsafeBlocks>True</AllowUnsafeBlocks>
+  </PropertyGroup>
+  <PropertyGroup />
+  <ItemGroup />
+  <ItemGroup>
+    <Reference Include="UnityEngine.IMGUIModule" />
+    <Reference Include="UnityEngine.CoreModule" />
+    <Reference Include="UnityEngine.TextRenderingModule" />
+    <Reference Include="System.Core">
+      <HintPath>../../../../usr/share/dotnet/shared/Microsoft.NETCore.App/6.0.25/System.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.Collections" />
+    <Reference Include="Unity.Burst" />
+    <Reference Include="Unity.Mathematics" />
+    <Reference Include="com.rlabrecque.steamworks.net" />
+    <Reference Include="System.Xml">
+      <HintPath>../../../../usr/share/dotnet/shared/Microsoft.NETCore.App/6.0.25/System.Xml.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.AudioModule" />
+    <Reference Include="Assembly-CSharp-firstpass" />
+    <Reference Include="System.Xml.Linq">
+      <HintPath>../../../../usr/share/dotnet/shared/Microsoft.NETCore.App/6.0.25/System.Xml.Linq.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.AssetBundleModule" />
+    <Reference Include="UnityEngine.UnityWebRequestAudioModule" />
+    <Reference Include="UnityEngine.UnityWebRequestModule" />
+    <Reference Include="UnityEngine.PhysicsModule" />
+    <Reference Include="Unity.TextMeshPro" />
+    <Reference Include="ISharpZipLib" />
+    <Reference Include="UnityEngine.InputLegacyModule" />
+    <Reference Include="UnityEngine.PerformanceReportingModule" />
+    <Reference Include="UnityEngine.ImageConversionModule" />
+    <Reference Include="UnityEngine.ScreenCaptureModule" />
+    <Reference Include="UnityEngine.UI" />
+  </ItemGroup>
+</Project>
